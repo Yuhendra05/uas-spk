@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perhitungan SAW</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-50 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white shadow">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Sistem Pemilihan Paket Data</h1>
+            <ul class="flex space-x-6 font-medium">
+                <li><a href="index.html" class="hover:text-yellow-300">Dashboard</a></li>
+                <li><a href="Data-Kriteria.html" class="hover:text-yellow-300">Data Kriteria</a></li>
+                <li><a href="Bobot.html" class="hover:text-yellow-300">Bobot</a></li>
+                <li><a href="Alternatif.html" class="hover:text-yellow-300">Alternatif</a></li>
+                <li><a href="perhitungan.html" class="hover:text-yellow-300 font-bold">Perhitungan</a></li>
+                <li><a href="login.html" class="hover:text-yellow-300">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Konten -->
+    <main class="p-8 max-w-6xl mx-auto space-y-8">
+        <h2 class="text-2xl font-bold text-center text-blue-700">Perhitungan Metode SAW</h2>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+            <button onclick="tampilkan('keputusan')"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Matriks Keputusan</button>
+            <button onclick="tampilkan('normalisasi')"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Normalisasi</button>
+            <button onclick="tampilkan('hasil')"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Hasil Akhir</button>
+            <button onclick="divHasil.innerHTML = ''"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Bersihkan Hasil</button>
+        </div>
+
+        <div id="hasilPerhitungan" class="space-y-8"></div>
+    </main>
+
+    <script>
+        const alternatifData = {
+            "A1": { nama: "A1 - XL", C1: 20, C2: 100, C3: 50, C4: 20, C5: 8 },
+            "A2": { nama: "A2 - Smartfren", C1: 30, C2: 120, C3: 60, C4: 25, C5: 9 },
+            "A3": { nama: "A3 - Telkomsel", C1: 25, C2: 90, C3: 55, C4: 15, C5: 7 }
+        };
+
+        const dipilihAlternatif = JSON.parse(localStorage.getItem("alternatifTerpilih")) || [];
+        const dataKriteria = JSON.parse(localStorage.getItem("dataKriteria")) || [];
+        const dataBobot = JSON.parse(localStorage.getItem("dataBobot")) || [];
+
+        const divHasil = document.getElementById("hasilPerhitungan");
+
+        if (dipilihAlternatif.length === 0 || dataKriteria.length === 0 || dataBobot.length === 0) {
+            divHasil.innerHTML = `<p class='text-red-600 text-center font-semibold'>Data tidak lengkap. Silakan pilih alternatif dan isi kriteria & bobot terlebih dahulu.</p>`;
+        } else {
+            // Ambil kriteria aktif
+            const kriteriaAktif = dataKriteria.map(d => d.kriteria.split(" - ")[0]);
+            const kriteriaTipe = Object.fromEntries(dataKriteria.map(d => [d.kriteria.split(" - ")[0], d.tipe]));
+            const kriteriaBobot = Object.fromEntries(dataBobot.map(d => [d.kriteria.split(" - ")[0], parseFloat(d.bobot)]));
+
+            // Matriks Keputusan
+            var matriks = dipilihAlternatif.map(kode => {
+                let alt = alternatifData[kode];
+                let row = { nama: alt.nama };
+                kriteriaAktif.forEach(k => row[k] = alt[k]);
+                return row;
+            });
+
+            // Matriks Normalisasi
+            var normalisasi = JSON.parse(JSON.stringify(matriks));
+            kriteriaAktif.forEach(k => {
+                let kolom = matriks.map(m => m[k]);
+                let max = Math.max(...kolom);
+                let min = Math.min(...kolom);
+                normalisasi.forEach((n, i) => {
+                    n[k] = kriteriaTipe[k] === "Benefit" ? (matriks[i][k] / max) : (min / matriks[i][k]);
+                });
+            });
+
+            // Hasil Perangkingan
+            var hasilAkhir = normalisasi.map((n, i) => {
+                let total = 0;
+                kriteriaAktif.forEach(k => total += n[k] * (kriteriaBobot[k] / 100));
+                return { nama: matriks[i].nama, total: total.toFixed(4) };
+            }).sort((a, b) => b.total - a.total);
+        }
+
+        function tampilkan(bagian) {
+            let konten = "";
+
+            if (bagian === "keputusan") {
+                konten = `<h3 class="text-xl font-semibold mt-8">1. Matriks Keputusan</h3>` + buatTabel(matriks);
+            } else if (bagian === "normalisasi") {
+                konten = `<h3 class="text-xl font-semibold mt-8">2. Normalisasi Matriks</h3>` + buatTabel(normalisasi, true);
+            } else if (bagian === "hasil") {
+                konten = `<h3 class="text-xl font-semibold mt-8">3. Hasil Perangkingan</h3>` + buatTabel(hasilAkhir);
+            }
+
+            divHasil.innerHTML += konten; // Tambahkan ke bawah, tidak menimpa
+        }
+
+        function buatTabel(data, isDesimal = false) {
+            if (!data.length) return "";
+            let cols = Object.keys(data[0]);
+            let th = cols.map(c => `<th class='border px-3 py-2'>${c}</th>`).join("");
+            let rows = data.map(row => {
+                let td = cols.map(c => `<td class='border px-3 py-2'>${isDesimal && !isNaN(row[c]) ? parseFloat(row[c]).toFixed(4) : row[c]}</td>`).join("");
+                return `<tr>${td}</tr>`;
+            }).join("");
+            return `<div class='overflow-x-auto'><table class='min-w-full text-sm text-left border border-gray-300 my-4'><thead class='bg-blue-100 text-blue-700'><tr>${th}</tr></thead><tbody class='text-gray-700'>${rows}</tbody></table></div>`;
+        }
+    </script>
+</body>
+
+</html>
