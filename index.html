@@ -1,134 +1,130 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - Pemilihan Paket Data</title>
+  <title>Dashboard - SPK Kota Internet</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ["Poppins", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+          },
+          colors: {
+            mint: "#2DD4BF",
+            darkgreen: "#166534",
+            softgray: "#E0F7F1",
+          },
+        },
+      },
+    };
+  </script>
+
   <style>
-    /* Transisi lembut untuk menu mobile */
     .mobile-menu {
       transition: max-height 0.3s ease-in-out;
     }
   </style>
 </head>
 
-<body class="bg-gray-50 font-sans antialiased">
-
-  <!-- Navbar -->
-  <header class="bg-blue-700 text-white shadow-md sticky top-0 z-50">
+<body class="bg-softgray text-gray-700 font-body antialiased">
+  <!-- ✅ Navbar -->
+  <header class="bg-darkgreen text-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">SPK Paket Data</h1>
+      <h1 class="text-2xl font-heading font-bold">SPK Pemilihan Paket Data</h1>
       <button class="md:hidden focus:outline-none" id="menu-toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-          viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
       <nav class="hidden md:flex space-x-6 text-sm font-medium">
-        <a href="index.html" class="hover:text-yellow-300 transition">Dashboard</a>
-        <a href="Data-Kriteria.html" class="hover:text-yellow-300 transition">Data Kriteria</a>
-        <a href="Bobot.html" class="hover:text-yellow-300 transition">Bobot</a>
-        <a href="Alternatif.html" class="hover:text-yellow-300 transition">Alternatif</a>
-        <a href="perhitungan.html" class="hover:text-yellow-300 transition">Perhitungan</a>
-        <a href="login.html" class="hover:text-yellow-300 transition">Logout</a>
+        <a href="index.html" class="hover:text-mint transition">Dashboard</a>
+        <a href="Data-Kriteria.html" class="hover:text-mint transition">Kriteria</a>
+        <a href="Bobot.html" class="hover:text-mint transition">Bobot</a>
+        <a href="Alternatif.html" class="hover:text-mint transition">Alternatif</a>
+        <a href="perhitungan.html" class="hover:text-mint transition">Perhitungan</a>
+        <a href="login.html" class="hover:text-mint transition">Logout</a>
       </nav>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu overflow-hidden max-h-0 md:hidden px-4 bg-blue-800">
-      <a href="index.html" class="block py-2 hover:text-yellow-300">Dashboard</a>
-      <a href="Data-Kriteria.html" class="block py-2 hover:text-yellow-300">Data Kriteria</a>
-      <a href="Bobot.html" class="block py-2 hover:text-yellow-300">Bobot</a>
-      <a href="Alternatif.html" class="block py-2 hover:text-yellow-300">Alternatif</a>
-      <a href="perhitungan.html" class="block py-2 hover:text-yellow-300">Perhitungan</a>
-      <a href="login.html" class="block py-2 hover:text-yellow-300">Logout</a>
+    <!-- ✅ Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu overflow-hidden max-h-0 md:hidden px-4 bg-darkgreen">
+      <a href="index.html" class="block py-2 hover:text-mint">Dashboard</a>
+      <a href="Data-Kriteria.html" class="block py-2 hover:text-mint">Data Kriteria</a>
+      <a href="Bobot.html" class="block py-2 hover:text-mint">Bobot</a>
+      <a href="Alternatif.html" class="block py-2 hover:text-mint">Alternatif</a>
+      <a href="perhitungan.html" class="block py-2 hover:text-mint">Perhitungan</a>
+      <a href="login.html" class="block py-2 hover:text-mint">Logout</a>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- ✅ Main Content -->
   <main class="py-12 px-4 md:px-12">
     <div class="max-w-6xl mx-auto">
-
-      <!-- Header -->
+      <!-- ✅ Header Section -->
       <section class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-blue-700">Sistem Pendukung Keputusan</h2>
-        <h3 class="text-2xl md:text-3xl font-semibold text-blue-500 mt-2">Pemilihan Paket Data Terbaik</h3>
-        <p class="text-gray-600 mt-4 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-          Sistem ini membantu Anda memilih paket data internet terbaik berdasarkan
-          <span class="font-medium text-gray-800">Kecepatan Internet</span>,
-          <span class="font-medium text-gray-800">Harga</span>,
-          <span class="font-medium text-gray-800">FUP</span>,
-          <span class="font-medium text-gray-800">Kuota</span>, dan
-          <span class="font-medium text-gray-800">Kualitas Layanan</span> dengan metode
-          <span class="font-bold">SAW (Simple Additive Weighting)</span>.
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-darkgreen">Sistem Pendukung Keputusan</h2>
+        <h3 class="text-2xl md:text-3xl font-heading font-semibold mt-2 text-gray-700">Pemilihan Paket Data Kota Internet</h3>
+        <p class="mt-4 max-w-3xl mx-auto text-sm md:text-base leading-relaxed text-black font-normal">
+          Sistem ini membantu Anda memilih paket data terbaik berdasarkan
+          <span class="font-normal">Kecepatan</span>,
+          <span class="font-normal">Harga</span>,
+          <span class="font-normal">FUP</span>,
+          <span class="font-normal">Kuota</span>, dan
+          <span class="font-normal">Kualitas Layanan</span> menggunakan metode
+          <span class="font-normal">SAW (Simple Additive Weighting)</span>.
         </p>
       </section>
 
-      <!-- Kartu Fitur -->
+      <!-- ✅ Feature Cards -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Kartu -->
-        <div
-          class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2 flex items-center group-hover:underline">📋&nbsp; Data Kriteria</h4>
-          <p class="text-sm text-gray-600 mb-4">
-            Standar untuk menilai kualitas dan relevansi dalam pemilihan paket data.
-          </p>
-          <a href="Data-Kriteria.html"
-            class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat Kriteria →</a>
+        <!-- Card: Data Kriteria -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <h4 class="text-xl font-heading font-bold text-mint mb-2">📋 Data Kriteria</h4>
+          <p class="text-sm text-gray-600 mb-4">Standar penilaian kualitas paket data.</p>
+          <a href="Data-Kriteria.html" class="text-gray-700 hover:underline text-sm font-medium">Lihat Kriteria →</a>
         </div>
 
-        <div
-          class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2 flex items-center group-hover:underline">⚖️&nbsp; Bobot</h4>
-          <p class="text-sm text-gray-600 mb-4">
-            Menentukan tingkat kepentingan tiap kriteria berdasarkan preferensi pengguna.
-          </p>
-          <a href="Bobot.html"
-            class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat Bobot →</a>
+        <!-- Card: Bobot -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <h4 class="text-xl font-heading font-bold text-mint mb-2">⚖️ Bobot</h4>
+          <p class="text-sm text-gray-600 mb-4">Menentukan tingkat kepentingan setiap kriteria.</p>
+          <a href="Bobot.html" class="text-gray-700 hover:underline text-sm font-medium">Lihat Bobot →</a>
         </div>
 
-        <div
-          class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2 flex items-center group-hover:underline">🧠&nbsp; Alternatif</h4>
-          <p class="text-sm text-gray-600 mb-4">
-            Pilihan dari berbagai provider yang akan dievaluasi menggunakan preferensi pengguna.
-          </p>
-          <a href="Alternatif.html"
-            class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat Alternatif →</a>
+        <!-- Card: Alternatif -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <h4 class="text-xl font-heading font-bold text-mint mb-2">🧠 Alternatif</h4>
+          <p class="text-sm text-gray-600 mb-4">Daftar paket data dari provider yang akan dianalisis.</p>
+          <a href="Alternatif.html" class="text-gray-700 hover:underline text-sm font-medium">Lihat Alternatif →</a>
         </div>
 
-        <div
-          class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-          <h4 class="text-xl font-semibold text-blue-600 mb-2 flex items-center group-hover:underline">📊&nbsp; Perhitungan</h4>
-          <p class="text-sm text-gray-600 mb-4">
-            Hasil perhitungan SAW secara objektif untuk menentukan pilihan terbaik.
-          </p>
-          <a href="perhitungan.html"
-            class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat Perhitungan →</a>
+        <!-- Card: Perhitungan -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <h4 class="text-xl font-heading font-bold text-mint mb-2">📊 Perhitungan</h4>
+          <p class="text-sm text-gray-600 mb-4">Hasil akhir perhitungan berdasarkan metode SAW.</p>
+          <a href="perhitungan.html" class="text-gray-700 hover:underline text-sm font-medium">Lihat Hasil →</a>
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Script Toggle Menu -->
+  <!-- ✅ Script Toggle Mobile Menu -->
   <script>
     const toggleBtn = document.getElementById("menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
-
     toggleBtn.addEventListener("click", () => {
-      if (mobileMenu.classList.contains("max-h-0")) {
-        mobileMenu.classList.remove("max-h-0");
-        mobileMenu.classList.add("max-h-96");
-      } else {
-        mobileMenu.classList.remove("max-h-96");
-        mobileMenu.classList.add("max-h-0");
-      }
+      mobileMenu.classList.toggle("max-h-0");
+      mobileMenu.classList.toggle("max-h-96");
     });
   </script>
-
 </body>
-
 </html>

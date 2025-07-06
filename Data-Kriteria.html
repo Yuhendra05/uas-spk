@@ -1,109 +1,116 @@
 <!DOCTYPE html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input & Tabel Kriteria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input & Tabel Kriteria</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              heading: ["Poppins", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
 
-<body class="bg-blue-50 min-h-screen font-sans antialiased">
+  <body class="bg-[#E0F7F1] min-h-screen font-body text-[#374151] antialiased">
+    <!-- ✅ Navbar Hijau Tua -->
+    <nav class="bg-[#166534] text-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-heading font-bold">SPK Pemilihan Paket Data</h1>
+        <ul class="hidden md:flex space-x-6 font-medium text-sm">
+          <li><a href="index.html" class="hover:text-[#2DD4BF] transition">Dashboard</a></li>
+          <li><a href="Data-Kriteria.html" class="hover:text-[#2DD4BF] transition">Data Kriteria</a></li>
+          <li><a href="Bobot.html" class="hover:text-[#2DD4BF] transition">Bobot</a></li>
+          <li><a href="Alternatif.html" class="hover:text-[#2DD4BF] transition">Alternatif</a></li>
+          <li><a href="perhitungan.html" class="hover:text-[#2DD4BF] transition">Perhitungan</a></li>
+          <li><a href="login.html" class="hover:text-[#2DD4BF] transition">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
 
-  <!-- Navbar -->
-  <nav class="bg-blue-700 text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold">SPK Pemilihan Paket Data</h1>
-      <ul class="hidden md:flex space-x-6 font-medium text-sm">
-        <li><a href="index.html" class="hover:text-yellow-300 transition">Dashboard</a></li>
-        <li><a href="Data-Kriteria.html" class="hover:text-yellow-300 transition">Data Kriteria</a></li>
-        <li><a href="Bobot.html" class="hover:text-yellow-300 transition">Bobot</a></li>
-        <li><a href="Alternatif.html" class="hover:text-yellow-300 transition">Alternatif</a></li>
-        <li><a href="perhitungan.html" class="hover:text-yellow-300 transition">Perhitungan</a></li>
-        <li><a href="login.html" class="hover:text-yellow-300 transition">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
+    <!-- ✅ Konten Utama -->
+    <main class="py-10 px-4 md:px-8">
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 md:p-8">
+        <h2 class="text-3xl font-heading font-bold text-[#166534] mb-6 text-center">Input Kriteria</h2>
 
-  <!-- Konten -->
-  <main class="py-10 px-4 md:px-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 md:p-8">
-      <h2 class="text-3xl font-bold text-blue-700 mb-6 text-center">Input Kriteria</h2>
+        <!-- ✅ Form Input -->
+        <form id="kriteriaForm" class="space-y-5 mb-10">
+          <div>
+            <label class="block text-sm font-medium text-[#374151] mb-1">Kriteria</label>
+            <select id="kriteria" required onchange="updateTipe()" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2DD4BF]">
+              <option value="">-- Pilih Kriteria --</option>
+              <option value="C1 - Kecepatan Internet">C1 - Kecepatan Internet</option>
+              <option value="C2 - Harga Paket">C2 - Harga Paket</option>
+              <option value="C3 - Batas Pemakaian Wajar (FUP)">C3 - Batas Pemakaian Wajar (FUP)</option>
+              <option value="C4 - Kuota Data">C4 - Kuota Data</option>
+              <option value="C5 - Kualitas Layanan">C5 - Kualitas Layanan</option>
+            </select>
+          </div>
 
-      <!-- Form Input -->
-      <form id="kriteriaForm" class="space-y-5 mb-10">
+          <div>
+            <label class="block text-sm font-medium text-[#374151] mb-1">Tipe</label>
+            <input type="text" id="tipe" readonly class="w-full p-2.5 border rounded-lg bg-gray-100 border-gray-300 placeholder:text-gray-400" placeholder="Otomatis berdasarkan kriteria" />
+          </div>
+
+          <button type="submit" class="bg-[#166534] text-white px-6 py-2 rounded-lg hover:bg-green-800 transition duration-200">Tambah Kriteria</button>
+        </form>
+
+        <!-- ✅ Tabel Kriteria -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Kriteria</label>
-          <select id="kriteria" required onchange="updateTipe()"
-            class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            <option value="">-- Pilih Kriteria --</option>
-            <option value="C1 - Kecepatan Internet">C1 - Kecepatan Internet</option>
-            <option value="C2 - Harga Paket">C2 - Harga Paket</option>
-            <option value="C3 - Batas Pemakaian Wajar (FUP)">C3 - Batas Pemakaian Wajar (FUP)</option>
-            <option value="C4 - Kuota Data">C4 - Kuota Data</option>
-            <option value="C5 - Kualitas Layanan">C5 - Kualitas Layanan</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
-          <input type="text" id="tipe" readonly
-            class="w-full p-2.5 border rounded-lg bg-gray-100 border-gray-300 placeholder:text-gray-400"
-            placeholder="Otomatis berdasarkan kriteria" />
-        </div>
-
-        <button type="submit"
-          class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
-          Tambah Kriteria
-        </button>
-      </form>
-
-      <!-- Tabel Kriteria -->
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-4">Data Kriteria Tersimpan</h3>
-        <div class="overflow-x-auto rounded-lg shadow-sm">
-          <table class="w-full text-sm text-left border border-gray-300 rounded-lg">
-            <thead class="bg-blue-100 text-blue-700">
-              <tr>
-                <th class="border px-4 py-2">No</th>
-                <th class="border px-4 py-2">Kriteria</th>
-                <th class="border px-4 py-2">Tipe</th>
-                <th class="border px-4 py-2">Aksi</th>
-              </tr>
-            </thead>
-            <tbody class="text-gray-700 bg-white" id="tableBody">
-              <!-- Data akan muncul di sini -->
-            </tbody>
-          </table>
+          <h3 class="text-xl font-heading font-semibold text-[#2DD4BF] mb-4">Data Kriteria Tersimpan</h3>
+          <div class="overflow-x-auto rounded-lg shadow-sm">
+            <table class="w-full text-sm text-left border border-gray-300 rounded-lg">
+              <thead class="bg-[#CCFBF1] text-[#166534]">
+                <tr>
+                  <th class="border px-4 py-2">No</th>
+                  <th class="border px-4 py-2">Kriteria</th>
+                  <th class="border px-4 py-2">Tipe</th>
+                  <th class="border px-4 py-2">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700 bg-white" id="tableBody">
+                <!-- Data akan muncul di sini -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- Script -->
-  <script>
-    let dataKriteria = JSON.parse(localStorage.getItem("dataKriteria")) || [];
+    <!-- ✅ Script -->
+    <script>
+      let dataKriteria = JSON.parse(localStorage.getItem("dataKriteria")) || [];
 
-    const form = document.getElementById("kriteriaForm");
-    const tableBody = document.getElementById("tableBody");
+      const form = document.getElementById("kriteriaForm");
+      const tableBody = document.getElementById("tableBody");
 
-    function updateTipe() {
-      const kriteria = document.getElementById("kriteria").value;
-      const tipeInput = document.getElementById("tipe");
+      function updateTipe() {
+        const kriteria = document.getElementById("kriteria").value;
+        const tipeInput = document.getElementById("tipe");
 
-      if (kriteria.includes("C2")) {
-        tipeInput.value = "Cost";
-      } else if (kriteria) {
-        tipeInput.value = "Benefit";
-      } else {
-        tipeInput.value = "";
+        if (kriteria.includes("C2")) {
+          tipeInput.value = "Cost";
+        } else if (kriteria) {
+          tipeInput.value = "Benefit";
+        } else {
+          tipeInput.value = "";
+        }
       }
-    }
 
-    function renderTable() {
-      tableBody.innerHTML = "";
-      dataKriteria.forEach((item, index) => {
-        tableBody.innerHTML += `
+      function renderTable() {
+        tableBody.innerHTML = "";
+        dataKriteria.forEach((item, index) => {
+          tableBody.innerHTML += `
           <tr>
             <td class="border px-4 py-2">${index + 1}</td>
             <td class="border px-4 py-2">${item.kriteria}</td>
@@ -114,38 +121,37 @@
             </td>
           </tr>
         `;
+        });
+        localStorage.setItem("dataKriteria", JSON.stringify(dataKriteria));
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const kriteria = document.getElementById("kriteria").value;
+        const tipe = document.getElementById("tipe").value;
+
+        dataKriteria.push({ kriteria, tipe });
+        renderTable();
+        form.reset();
+        document.getElementById("tipe").value = "";
       });
-      localStorage.setItem("dataKriteria", JSON.stringify(dataKriteria));
-    }
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const kriteria = document.getElementById("kriteria").value;
-      const tipe = document.getElementById("tipe").value;
+      function hapusData(index) {
+        if (confirm("Yakin ingin menghapus data ini?")) {
+          dataKriteria.splice(index, 1);
+          renderTable();
+        }
+      }
 
-      dataKriteria.push({ kriteria, tipe });
-      renderTable();
-      form.reset();
-      document.getElementById("tipe").value = "";
-    });
-
-    function hapusData(index) {
-      if (confirm("Yakin ingin menghapus data ini?")) {
+      function editData(index) {
+        const item = dataKriteria[index];
+        document.getElementById("kriteria").value = item.kriteria;
+        updateTipe();
         dataKriteria.splice(index, 1);
         renderTable();
       }
-    }
 
-    function editData(index) {
-      const item = dataKriteria[index];
-      document.getElementById("kriteria").value = item.kriteria;
-      updateTipe();
-      dataKriteria.splice(index, 1);
       renderTable();
-    }
-
-    renderTable();
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

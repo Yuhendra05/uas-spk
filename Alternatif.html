@@ -1,136 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Alternatif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Alternatif</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Animasi hover */
-    label:hover {
-      transform: translateY(-2px);
-      transition: transform 0.2s ease;
-    }
+    <!-- Font dan Konfigurasi Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              heading: ["Poppins", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#166534",
+              accent: "#2DD4BF",
+              bgmint: "#E0F7F1",
+            },
+          },
+        },
+      };
+    </script>
 
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  </style>
-</head>
-
-<body class="bg-gradient-to-b from-blue-100 to-blue-50 min-h-screen text-gray-800">
-
-  <!-- Navbar -->
-  <nav class="bg-blue-700 shadow text-white">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold tracking-wide">SPK Pemilihan Paket Data</h1>
-      <ul class="flex space-x-6 text-sm md:text-base font-medium">
-        <li><a href="index.html" class="hover:text-yellow-300">Dashboard</a></li>
-        <li><a href="Data-Kriteria.html" class="hover:text-yellow-300">Kriteria</a></li>
-        <li><a href="Bobot.html" class="hover:text-yellow-300">Bobot</a></li>
-        <li><a href="Alternatif.html" class="text-yellow-300 font-semibold underline">Alternatif</a></li>
-        <li><a href="perhitungan.html" class="hover:text-yellow-300">Perhitungan</a></li>
-        <li><a href="login.html" class="hover:text-yellow-300">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Konten -->
-  <main class="p-6 md:p-10 space-y-8">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Pilih Alternatif Paket Data</h2>
-      <form id="formAlternatif">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Paket 1 -->
-          <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-blue-100">
-            <input type="checkbox" name="paket" value="A1" class="mt-1 accent-blue-600">
-            <div>
-              <h3 class="text-lg font-semibold text-blue-700">Paket XL</h3>
-              <p class="text-sm text-gray-600">Kecepatan stabil & jangkauan luas.</p>
-            </div>
-          </label>
-
-          <!-- Paket 2 -->
-          <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-blue-100">
-            <input type="checkbox" name="paket" value="A2" class="mt-1 accent-pink-500">
-            <div>
-              <h3 class="text-lg font-semibold text-pink-600">Smartfren</h3>
-              <p class="text-sm text-gray-600">Hemat dengan jaringan luas.</p>
-            </div>
-          </label>
-
-          <!-- Paket 3 -->
-          <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-blue-100">
-            <input type="checkbox" name="paket" value="A3" class="mt-1 accent-red-600">
-            <div>
-              <h3 class="text-lg font-semibold text-red-600">Telkomsel</h3>
-              <p class="text-sm text-gray-600">Kualitas premium & jangkauan nasional.</p>
-            </div>
-          </label>
-        </div>
-
-        <div class="text-center mt-8">
-          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-md transition-all">
-            Tampilkan Tabel
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <!-- Tabel Alternatif -->
-    <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow border border-gray-200 hidden" id="tabelAlternatif">
-      <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Tabel Data Alternatif Terpilih</h3>
-      <div class="overflow-x-auto">
-        <table class="min-w-full text-sm text-left border border-gray-300 rounded-lg">
-          <thead class="bg-blue-100 text-blue-800">
-            <tr>
-              <th class="border px-4 py-2">Alternatif</th>
-              <th class="border px-4 py-2">C1 (Mbps)</th>
-              <th class="border px-4 py-2">C2 (Harga)</th>
-              <th class="border px-4 py-2">C3 (FUP)</th>
-              <th class="border px-4 py-2">C4 (Kuota)</th>
-              <th class="border px-4 py-2">C5 (Layanan)</th>
-            </tr>
-          </thead>
-          <tbody id="isiTabel" class="text-gray-700 bg-white">
-            <!-- Diisi oleh JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
-
-  <!-- Script -->
-  <script>
-    const dataAlternatif = {
-      "A1": { nama: "A1 - XL", C1: 20, C2: 100, C3: 50, C4: 20, C5: 8 },
-      "A2": { nama: "A2 - Smartfren", C1: 30, C2: 120, C3: 60, C4: 25, C5: 9 },
-      "A3": { nama: "A3 - Telkomsel", C1: 25, C2: 90, C3: 55, C4: 15, C5: 7 }
-    };
-
-    document.getElementById("formAlternatif").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const checked = [...document.querySelectorAll("input[name='paket']:checked")].map(c => c.value);
-      const isiTabel = document.getElementById("isiTabel");
-      const wrapper = document.getElementById("tabelAlternatif");
-
-      isiTabel.innerHTML = "";
-
-      if (checked.length === 0) {
-        alert("Silakan pilih minimal satu paket!");
-        return;
+    <style>
+      label:hover {
+        transform: translateY(-2px);
+        transition: transform 0.2s ease;
       }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
 
-      // Simpan ke localStorage untuk digunakan di halaman perhitungan
-      localStorage.setItem("alternatifTerpilih", JSON.stringify(checked));
+  <body class="bg-bgmint min-h-screen text-[#374151] font-body">
+    <!-- Navbar -->
+    <nav class="bg-primary shadow text-white">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-heading font-bold">SPK Pemilihan Paket Data</h1>
+        <ul class="flex space-x-6 text-sm md:text-base font-medium">
+          <li><a href="index.html" class="hover:text-accent">Dashboard</a></li>
+          <li><a href="Data-Kriteria.html" class="hover:text-accent">Kriteria</a></li>
+          <li><a href="Bobot.html" class="hover:text-accent">Bobot</a></li>
+          <li><a href="Alternatif.html" class="text-accent font-semibold underline">Alternatif</a></li>
+          <li><a href="perhitungan.html" class="hover:text-accent">Perhitungan</a></li>
+          <li><a href="login.html" class="hover:text-accent">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
 
-      // Tampilkan data ke tabel
-      checked.forEach(kode => {
-        const d = dataAlternatif[kode];
-        isiTabel.innerHTML += `
+    <!-- Konten -->
+    <main class="p-6 md:p-10 space-y-8">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-heading font-bold text-primary mb-6 text-center">Pilih Alternatif Paket Data</h2>
+        <form id="formAlternatif">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Paket 1 -->
+            <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-accent">
+              <input type="checkbox" name="paket" value="A1" class="mt-1 accent-primary" />
+              <div>
+                <h3 class="text-lg font-semibold text-primary">Paket XL</h3>
+                <p class="text-sm text-gray-600">Kecepatan stabil & jangkauan luas.</p>
+              </div>
+            </label>
+
+            <!-- Paket 2 -->
+            <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-accent">
+              <input type="checkbox" name="paket" value="A2" class="mt-1 accent-primary" />
+              <div>
+                <h3 class="text-lg font-semibold text-primary">Smartfren</h3>
+                <p class="text-sm text-gray-600">Hemat dengan jaringan luas.</p>
+              </div>
+            </label>
+
+            <!-- Paket 3 -->
+            <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-accent">
+              <input type="checkbox" name="paket" value="A3" class="mt-1 accent-primary" />
+              <div>
+                <h3 class="text-lg font-semibold text-primary">Telkomsel</h3>
+                <p class="text-sm text-gray-600">Kualitas premium & jangkauan nasional.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Tombol -->
+          <div class="text-center mt-8">
+            <button type="submit" class="bg-primary hover:bg-green-800 text-white px-8 py-3 rounded-full font-semibold shadow-md transition-all">Tampilkan Tabel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabel Alternatif -->
+      <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow border border-gray-200 hidden" id="tabelAlternatif">
+        <h3 class="text-xl font-heading font-semibold text-accent mb-4 text-center">📊 Tabel Data Alternatif Terpilih</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm text-left border border-gray-300 rounded-lg">
+            <thead class="bg-[#CCFBF1] text-primary">
+              <tr>
+                <th class="border px-4 py-2">Alternatif</th>
+                <th class="border px-4 py-2">C1 (Mbps)</th>
+                <th class="border px-4 py-2">C2 (Harga)</th>
+                <th class="border px-4 py-2">C3 (FUP)</th>
+                <th class="border px-4 py-2">C4 (Kuota)</th>
+                <th class="border px-4 py-2">C5 (Layanan)</th>
+              </tr>
+            </thead>
+            <tbody id="isiTabel" class="text-gray-700 bg-white">
+              <!-- Diisi oleh JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Script -->
+    <script>
+      const dataAlternatif = {
+        A1: { nama: "A1 - XL", C1: 20, C2: 100, C3: 50, C4: 20, C5: 8 },
+        A2: { nama: "A2 - Smartfren", C1: 30, C2: 120, C3: 60, C4: 25, C5: 9 },
+        A3: { nama: "A3 - Telkomsel", C1: 25, C2: 90, C3: 55, C4: 15, C5: 7 },
+      };
+
+      document.getElementById("formAlternatif").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const checked = [...document.querySelectorAll("input[name='paket']:checked")].map((c) => c.value);
+        const isiTabel = document.getElementById("isiTabel");
+        const wrapper = document.getElementById("tabelAlternatif");
+
+        isiTabel.innerHTML = "";
+
+        if (checked.length === 0) {
+          alert("Silakan pilih minimal satu paket!");
+          return;
+        }
+
+        localStorage.setItem("alternatifTerpilih", JSON.stringify(checked));
+
+        checked.forEach((kode) => {
+          const d = dataAlternatif[kode];
+          isiTabel.innerHTML += `
           <tr>
             <td class="border px-4 py-2 font-medium">${d.nama}</td>
             <td class="border px-4 py-2">${d.C1}</td>
@@ -139,11 +153,10 @@
             <td class="border px-4 py-2">${d.C4}</td>
             <td class="border px-4 py-2">${d.C5}</td>
           </tr>`;
+        });
+
+        wrapper.classList.remove("hidden");
       });
-
-      wrapper.classList.remove("hidden");
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
