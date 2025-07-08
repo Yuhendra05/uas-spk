@@ -25,7 +25,7 @@
         },
       };
     </script>
-
+    
     <style>
       label:hover {
         transform: translateY(-2px);
@@ -43,7 +43,16 @@
     <nav class="bg-primary shadow text-white">
       <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <h1 class="text-xl font-heading font-bold">SPK Pemilihan Paket Data</h1>
-        <ul class="flex space-x-6 text-sm md:text-base font-medium">
+
+        <!-- Tombol Menu Mobile -->
+        <button id="menuBtn" class="md:hidden focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <!-- Menu Desktop -->
+        <ul class="hidden md:flex space-x-6 text-sm md:text-base font-medium">
           <li><a href="index.html" class="hover:text-accent">Dashboard</a></li>
           <li><a href="Data-Kriteria.html" class="hover:text-accent">Kriteria</a></li>
           <li><a href="Bobot.html" class="hover:text-accent">Bobot</a></li>
@@ -52,6 +61,16 @@
           <li><a href="login.html" class="hover:text-accent">Logout</a></li>
         </ul>
       </div>
+
+      <!-- Menu Mobile -->
+      <ul id="mobileMenu" class="md:hidden px-4 pb-4 space-y-2 text-sm font-medium hidden">
+        <li><a href="index.html" class="block text-white hover:text-accent">Dashboard</a></li>
+        <li><a href="Data-Kriteria.html" class="block text-white hover:text-accent">Kriteria</a></li>
+        <li><a href="Bobot.html" class="block text-white hover:text-accent">Bobot</a></li>
+        <li><a href="Alternatif.html" class="block text-accent font-semibold underline">Alternatif</a></li>
+        <li><a href="perhitungan.html" class="block text-white hover:text-accent">Perhitungan</a></li>
+        <li><a href="login.html" class="block text-white hover:text-accent">Logout</a></li>
+      </ul>
     </nav>
 
     <!-- Konten -->
@@ -120,6 +139,12 @@
 
     <!-- Script -->
     <script>
+      // Toggle menu mobile
+      document.getElementById("menuBtn").addEventListener("click", function () {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("hidden");
+      });
+
       const dataAlternatif = {
         A1: { nama: "A1 - XL", C1: 20, C2: 100, C3: 50, C4: 20, C5: 8 },
         A2: { nama: "A2 - Smartfren", C1: 30, C2: 120, C3: 60, C4: 25, C5: 9 },
@@ -128,11 +153,9 @@
 
       document.getElementById("formAlternatif").addEventListener("submit", function (e) {
         e.preventDefault();
-
         const checked = [...document.querySelectorAll("input[name='paket']:checked")].map((c) => c.value);
         const isiTabel = document.getElementById("isiTabel");
         const wrapper = document.getElementById("tabelAlternatif");
-
         isiTabel.innerHTML = "";
 
         if (checked.length === 0) {
