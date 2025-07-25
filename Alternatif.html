@@ -4,12 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Alternatif</title>
+  <title>Alternatif</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font dan Konfigurasi Tailwind -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -18,172 +15,132 @@
             heading: ["Poppins", "sans-serif"],
             body: ["Inter", "sans-serif"],
           },
-          colors: {
-            primary: "#166534",
-            accent: "#2DD4BF",
-            bgmint: "#E0F7F1",
-          },
         },
       },
     };
   </script>
-
-  <style>
-    label:hover {
-      transform: translateY(-2px);
-      transition: transform 0.2s ease;
-    }
-
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  </style>
 </head>
 
-<body class="bg-bgmint min-h-screen text-[#374151] font-body">
+<body class="bg-[#E0F7F1] min-h-screen font-body text-[#374151]">
   <!-- Navbar -->
-  <nav class="bg-primary shadow text-white">
+  <nav class="bg-[#166534] text-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-xl font-heading font-bold">SPK Pemilihan Paket Data</h1>
-
-      <!-- Tombol Menu Mobile -->
       <button id="menuBtn" class="md:hidden focus:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-
-      <!-- Menu Desktop -->
-      <ul class="hidden md:flex space-x-6 text-sm md:text-base font-medium">
-        <li><a href="index.html" class="hover:text-accent">Dashboard</a></li>
-        <li><a href="Data-Kriteria.html" class="hover:text-accent">Kriteria</a></li>
-        <li><a href="Bobot.html" class="hover:text-accent">Bobot</a></li>
-        <li><a href="Alternatif.html" class="text-accent font-semibold underline">Alternatif</a></li>
-        <li><a href="perhitungan.html" class="hover:text-accent">Perhitungan</a></li>
-        <li><a href="login.html" class="hover:text-accent">Logout</a></li>
+      <ul class="hidden md:flex space-x-6 font-medium text-sm">
+        <li><a href="index.html" class="hover:text-[#2DD4BF]">Dashboard</a></li>
+        <li><a href="Data-Kriteria.html" class="hover:text-[#2DD4BF]">Data Kriteria</a></li>
+        <li><a href="Bobot.html" class="hover:text-[#2DD4BF]">Bobot</a></li>
+        <li><a href="Alternatif.html" class="text-[#2DD4BF] font-bold">Alternatif</a></li>
+        <li><a href="perhitungan.html" class="hover:text-[#2DD4BF]">Perhitungan</a></li>
+        <li><a href="login.html" class="hover:text-[#2DD4BF]">Logout</a></li>
       </ul>
     </div>
-
-    <!-- Menu Mobile -->
-    <ul id="mobileMenu" class="md:hidden px-4 pb-4 space-y-2 text-sm font-medium hidden">
-      <li><a href="index.html" class="block text-white hover:text-accent">Dashboard</a></li>
-      <li><a href="Data-Kriteria.html" class="block text-white hover:text-accent">Kriteria</a></li>
-      <li><a href="Bobot.html" class="block text-white hover:text-accent">Bobot</a></li>
-      <li><a href="Alternatif.html" class="block text-accent font-semibold underline">Alternatif</a></li>
-      <li><a href="perhitungan.html" class="block text-white hover:text-accent">Perhitungan</a></li>
-      <li><a href="login.html" class="block text-white hover:text-accent">Logout</a></li>
+    <ul id="mobileMenu" class="md:hidden px-4 pb-4 space-y-2 font-medium text-sm hidden">
+      <li><a href="index.html" class="block text-white">Dashboard</a></li>
+      <li><a href="Data-Kriteria.html" class="block text-white">Data Kriteria</a></li>
+      <li><a href="Bobot.html" class="block text-white">Bobot</a></li>
+      <li><a href="Alternatif.html" class="block text-[#2DD4BF] font-bold">Alternatif</a></li>
+      <li><a href="perhitungan.html" class="block text-white">Perhitungan</a></li>
+      <li><a href="login.html" class="block text-white">Logout</a></li>
     </ul>
   </nav>
 
-  <!-- Konten -->
-  <main class="p-6 md:p-10 space-y-8">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-heading font-bold text-primary mb-6 text-center">Pilih Alternatif Paket Data</h2>
-      <form id="formAlternatif">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Paket 1 -->
-          <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-accent">
-            <input type="checkbox" name="paket" value="A1" class="mt-1 accent-primary" />
-            <div>
-              <h3 class="text-lg font-semibold text-primary">Paket XL</h3>
-              <p class="text-sm text-gray-600">Kecepatan stabil & jangkauan luas.</p>
-            </div>
-          </label>
-
-          <!-- Paket 2 -->
-          <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-accent">
-            <input type="checkbox" name="paket" value="A2" class="mt-1 accent-primary" />
-            <div>
-              <h3 class="text-lg font-semibold text-primary">Smartfren</h3>
-              <p class="text-sm text-gray-600">Hemat dengan jaringan luas.</p>
-            </div>
-          </label>
-
-          <!-- Paket 3 -->
-          <label class="bg-white p-6 rounded-xl shadow hover:shadow-lg flex space-x-3 items-start border border-accent">
-            <input type="checkbox" name="paket" value="A3" class="mt-1 accent-primary" />
-            <div>
-              <h3 class="text-lg font-semibold text-primary">Telkomsel</h3>
-              <p class="text-sm text-gray-600">Kualitas premium & jangkauan nasional.</p>
-            </div>
-          </label>
+  <!-- Main -->
+  <main class="p-6 max-w-6xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-lg p-6">
+      <h2 class="text-2xl font-heading font-bold text-[#166534] mb-4 text-center">Input Nilai Alternatif</h2>
+      <form id="alternatifForm">
+        <div class="overflow-x-auto">
+          <table class="w-full border text-sm text-left">
+            <thead class="bg-[#CCFBF1] text-[#166534]">
+              <tr>
+                <th class="border px-4 py-2">Alternatif</th>
+                <th id="kriteriaHeader" class="border px-4 py-2" colspan="1">Kriteria</th>
+              </tr>
+            </thead>
+            <tbody id="alternatifTable" class="bg-white text-[#374151]">
+              <!-- Diisi oleh JavaScript -->
+            </tbody>
+          </table>
         </div>
-
-        <!-- Tombol -->
-        <div class="text-center mt-8">
-          <button type="submit"
-            class="bg-primary hover:bg-green-800 text-white px-8 py-3 rounded-full font-semibold shadow-md transition-all">Tampilkan
-            Tabel</button>
+        <div class="mt-6 text-center">
+          <button type="submit" class="bg-[#166534] text-white px-6 py-2 rounded-lg hover:bg-green-800 transition">
+            Simpan Nilai Alternatif
+          </button>
         </div>
       </form>
-    </div>
-
-    <!-- Tabel Alternatif -->
-    <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow border border-gray-200 hidden" id="tabelAlternatif">
-      <h3 class="text-xl font-heading font-semibold text-accent mb-4 text-center">📊 Tabel Data Alternatif Terpilih</h3>
-      <div class="overflow-x-auto">
-        <table class="min-w-full text-sm text-left border border-gray-300 rounded-lg">
-          <thead class="bg-[#CCFBF1] text-primary">
-            <tr>
-              <th class="border px-4 py-2">Alternatif</th>
-              <th class="border px-4 py-2">C1 (Mbps)</th>
-              <th class="border px-4 py-2">C2 (Harga)</th>
-              <th class="border px-4 py-2">C3 (FUP)</th>
-              <th class="border px-4 py-2">C4 (Kuota)</th>
-              <th class="border px-4 py-2">C5 (Layanan)</th>
-            </tr>
-          </thead>
-          <tbody id="isiTabel" class="text-gray-700 bg-white">
-            <!-- Diisi oleh JS -->
-          </tbody>
-        </table>
-      </div>
     </div>
   </main>
 
   <!-- Script -->
   <script>
-    // Toggle menu mobile
-    document.getElementById("menuBtn").addEventListener("click", function () {
-      const menu = document.getElementById("mobileMenu");
-      menu.classList.toggle("hidden");
-    });
+    const kriteria = JSON.parse(localStorage.getItem("dataKriteria")) || [];
+    const bobot = JSON.parse(localStorage.getItem("dataBobot")) || [];
 
-    const dataAlternatif = {
-      A1: { nama: "A1 - XL", C1: 20, C2: 100, C3: 50, C4: 20, C5: 8 },
-      A2: { nama: "A2 - Smartfren", C1: 30, C2: 120, C3: 60, C4: 25, C5: 9 },
-      A3: { nama: "A3 - Telkomsel", C1: 25, C2: 90, C3: 55, C4: 15, C5: 7 },
-    };
+    // ✅ Alternatif sudah ditambahkan Indosat dan Axis
+    const alternatif = ["XL", "Smartfren", "Telkomsel", "Indosat", "Axis"];
 
-    document.getElementById("formAlternatif").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const checked = [...document.querySelectorAll("input[name='paket']:checked")].map((c) => c.value);
-      const isiTabel = document.getElementById("isiTabel");
-      const wrapper = document.getElementById("tabelAlternatif");
-      isiTabel.innerHTML = "";
+    const table = document.getElementById("alternatifTable");
+    const kriteriaHeader = document.getElementById("kriteriaHeader");
+    const savedAlternatif = JSON.parse(localStorage.getItem("dataAlternatif")) || {};
 
-      if (checked.length === 0) {
-        alert("Silakan pilih minimal satu paket!");
-        return;
-      }
+    // Render Header
+    kriteriaHeader.setAttribute("colspan", kriteria.length);
+    kriteriaHeader.parentElement.innerHTML = `
+      <th class="border px-4 py-2">Alternatif</th>
+      ${kriteria.map(k => `<th class="border px-4 py-2">${k.kriteria}</th>`).join("")}
+    `;
 
-      localStorage.setItem("alternatifTerpilih", JSON.stringify(checked));
-
-      checked.forEach((kode) => {
-        const d = dataAlternatif[kode];
-        isiTabel.innerHTML += `
+    // Render Baris Alternatif
+    function renderRows() {
+      table.innerHTML = "";
+      alternatif.forEach((alt) => {
+        table.innerHTML += `
           <tr>
-            <td class="border px-4 py-2 font-medium">${d.nama}</td>
-            <td class="border px-4 py-2">${d.C1}</td>
-            <td class="border px-4 py-2">${d.C2}</td>
-            <td class="border px-4 py-2">${d.C3}</td>
-            <td class="border px-4 py-2">${d.C4}</td>
-            <td class="border px-4 py-2">${d.C5}</td>
-          </tr>`;
+            <td class="border px-4 py-2 font-semibold">${alt}</td>
+            ${kriteria.map(k => {
+              const val = savedAlternatif[alt]?.[k.kriteria] ?? "";
+              return `
+                <td class="border px-2 py-2">
+                  <input type="number" step="any" required
+                    class="w-full border p-1 rounded focus:ring-emerald-400"
+                    name="nilai-${alt}-${k.kriteria}" value="${val}" />
+                </td>`;
+            }).join("")}
+          </tr>
+        `;
+      });
+    }
+
+    document.getElementById("alternatifForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const hasil = {};
+
+      alternatif.forEach(alt => {
+        hasil[alt] = {};
+        kriteria.forEach(k => {
+          const val = formData.get(`nilai-${alt}-${k.kriteria}`);
+          hasil[alt][k.kriteria] = parseFloat(val);
+        });
       });
 
-      wrapper.classList.remove("hidden");
+      localStorage.setItem("dataAlternatif", JSON.stringify(hasil));
+      alert("✅ Data alternatif berhasil disimpan!");
+    });
+
+    renderRows();
+
+    // Menu mobile toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
     });
   </script>
 </body>

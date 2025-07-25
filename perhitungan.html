@@ -1,162 +1,112 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perhitungan SAW</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap"
-    rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["Poppins", "sans-serif"],
-            body: ["Inter", "sans-serif"],
-          },
-          colors: {
-            primary: "#166534",
-            accent: "#2DD4BF",
-            bgmint: "#E0F7F1",
-          },
-        },
-      },
-    };
-  </script>
 </head>
-
-<body class="bg-bgmint min-h-screen font-body text-[#374151]">
+<body class="bg-gray-100 min-h-screen font-sans text-gray-800">
   <!-- Navbar -->
-  <nav class="bg-primary text-white shadow">
+  <nav class="bg-[#166534] text-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-xl font-heading font-bold">SPK Pemilihan Paket Data</h1>
-
-      <!-- Menu Desktop -->
-      <ul class="hidden md:flex space-x-6 font-medium">
-        <li><a href="index.html" class="hover:text-accent">Dashboard</a></li>
-        <li><a href="Data-Kriteria.html" class="hover:text-accent">Data Kriteria</a></li>
-        <li><a href="Bobot.html" class="hover:text-accent">Bobot</a></li>
-        <li><a href="Alternatif.html" class="hover:text-accent">Alternatif</a></li>
-        <li><a href="perhitungan.html" class="text-accent font-bold underline">Perhitungan</a></li>
-        <li><a href="login.html" class="hover:text-accent">Logout</a></li>
-      </ul>
-
-      <!-- Tombol Menu Mobile -->
       <button id="menuBtn" class="md:hidden focus:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
+      <ul class="hidden md:flex space-x-6 font-medium text-sm">
+        <li><a href="index.html" class="hover:text-[#2DD4BF] transition">Dashboard</a></li>
+        <li><a href="Data-Kriteria.html" class="hover:text-[#2DD4BF] transition">Data Kriteria</a></li>
+        <li><a href="Bobot.html" class="hover:text-[#2DD4BF] transition">Bobot</a></li>
+        <li><a href="Alternatif.html" class="hover:text-[#2DD4BF] transition">Alternatif</a></li>
+        <li><a href="perhitungan.html" class="hover:text-[#2DD4BF] transition">Perhitungan</a></li>
+        <li><a href="login.html" class="hover:text-[#2DD4BF] transition">Logout</a></li>
+      </ul>
     </div>
-
-    <!-- Menu Mobile -->
-    <ul id="mobileMenu" class="md:hidden hidden px-4 pb-4 space-y-2 font-medium text-sm">
-      <li><a href="index.html" class="block text-white hover:text-accent">Dashboard</a></li>
-      <li><a href="Data-Kriteria.html" class="block text-white hover:text-accent">Data Kriteria</a></li>
-      <li><a href="Bobot.html" class="block text-white hover:text-accent">Bobot</a></li>
-      <li><a href="Alternatif.html" class="block text-white hover:text-accent">Alternatif</a></li>
-      <li><a href="perhitungan.html" class="block text-accent font-bold underline">Perhitungan</a></li>
-      <li><a href="login.html" class="block text-white hover:text-accent">Logout</a></li>
+    <ul id="mobileMenu" class="md:hidden px-4 pb-4 space-y-2 font-medium text-sm hidden">
+      <li><a href="index.html" class="block text-white hover:text-[#2DD4BF]">Dashboard</a></li>
+      <li><a href="Data-Kriteria.html" class="block text-white hover:text-[#2DD4BF]">Data Kriteria</a></li>
+      <li><a href="Bobot.html" class="block text-white hover:text-[#2DD4BF]">Bobot</a></li>
+      <li><a href="Alternatif.html" class="block text-white hover:text-[#2DD4BF]">Alternatif</a></li>
+      <li><a href="perhitungan.html" class="block text-white hover:text-[#2DD4BF]">Perhitungan</a></li>
+      <li><a href="login.html" class="block text-white hover:text-[#2DD4BF]">Logout</a></li>
     </ul>
   </nav>
 
-  <!-- Konten -->
-  <main class="p-6 md:p-10 max-w-6xl mx-auto space-y-8">
-    <h2 class="text-3xl font-heading font-bold text-center text-primary">Perhitungan Metode SAW</h2>
-
-    <div class="flex flex-wrap justify-center gap-4">
-      <button onclick="tampilkan('keputusan')"
-        class="bg-primary text-white px-5 py-2 rounded hover:bg-green-800 transition"> Matriks Keputusan</button>
-      <button onclick="tampilkan('normalisasi')"
-        class="bg-primary text-white px-5 py-2 rounded hover:bg-green-800 transition"> Normalisasi</button>
-      <button onclick="tampilkan('hasil')"
-        class="bg-primary text-white px-5 py-2 rounded hover:bg-green-800 transition">Hasil Akhir</button>
-      <button onclick="divHasil.innerHTML = ''"
-        class="bg-gray-400 text-white px-5 py-2 rounded hover:bg-gray-500 transition">Bersihkan</button>
+  <main class="p-6 max-w-6xl mx-auto">
+    <div class="bg-white rounded-xl shadow p-6">
+      <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Hasil Perhitungan SAW</h2>
+      <div id="hasil"></div>
     </div>
-
-    <div id="hasilPerhitungan" class="space-y-8"></div>
   </main>
 
   <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
-    menuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
+    const kriteria = JSON.parse(localStorage.getItem("dataKriteria")) || [];
+    const bobot = JSON.parse(localStorage.getItem("dataBobot")) || [];
+    const alternatifData = JSON.parse(localStorage.getItem("dataAlternatif")) || {};
+
+    // Ambil nama kriteria
+    const kriteriaList = kriteria.map(k => k.kriteria);
+
+    // Ambil nama alternatif
+    const alternatifList = Object.keys(alternatifData);
+
+    // Buat tabel normalisasi
+    const normalisasi = {};
+    kriteriaList.forEach(k => {
+      const nilaiList = alternatifList.map(a => alternatifData[a][k]);
+      const max = Math.max(...nilaiList);
+      const min = Math.min(...nilaiList);
+
+      alternatifList.forEach(a => {
+        if (!normalisasi[a]) normalisasi[a] = {};
+        const tipe = kriteria.find(kr => kr.kriteria === k)?.tipe;
+
+        // Jika benefit -> nilai / max, jika cost -> min / nilai
+        normalisasi[a][k] = tipe === 'cost' ? (min / alternatifData[a][k]) : (alternatifData[a][k] / max);
+      });
     });
 
-    const alternatifData = {
-      A1: { nama: "A1 - XL", C1: 20, C2: 100, C3: 50, C4: 20, C5: 8 },
-      A2: { nama: "A2 - Smartfren", C1: 30, C2: 120, C3: 60, C4: 25, C5: 9 },
-      A3: { nama: "A3 - Telkomsel", C1: 25, C2: 90, C3: 55, C4: 15, C5: 7 },
-    };
+    // Hitung skor akhir
+    const bobotMap = {};
+    bobot.forEach(b => {
+      bobotMap[b.kriteria] = parseFloat(b.bobot);
+    });
 
-    const dipilihAlternatif = JSON.parse(localStorage.getItem("alternatifTerpilih")) || [];
-    const dataKriteria = JSON.parse(localStorage.getItem("dataKriteria")) || [];
-    const dataBobot = JSON.parse(localStorage.getItem("dataBobot")) || [];
-    const divHasil = document.getElementById("hasilPerhitungan");
-
-    if (dipilihAlternatif.length === 0 || dataKriteria.length === 0 || dataBobot.length === 0) {
-      divHasil.innerHTML = `<p class='text-red-600 text-center font-semibold'>⚠️ Data tidak lengkap. Silakan isi semua data terlebih dahulu.</p>`;
-    } else {
-      const kriteriaAktif = dataKriteria.map((d) => d.kriteria.split(" - ")[0]);
-      const kriteriaTipe = Object.fromEntries(dataKriteria.map((d) => [d.kriteria.split(" - ")[0], d.tipe]));
-      const kriteriaBobot = Object.fromEntries(dataBobot.map((d) => [d.kriteria.split(" - ")[0], parseFloat(d.bobot)]));
-
-      var matriks = dipilihAlternatif.map((kode) => {
-        let alt = alternatifData[kode];
-        let row = { Alternatif: alt.nama };
-        kriteriaAktif.forEach((k) => (row[k] = alt[k]));
-        return row;
+    const hasilAkhir = alternatifList.map(a => {
+      let total = 0;
+      kriteriaList.forEach(k => {
+        total += normalisasi[a][k] * bobotMap[k];
       });
+      return { nama: a, skor: total };
+    }).sort((a, b) => b.skor - a.skor);
 
-      var normalisasi = JSON.parse(JSON.stringify(matriks));
-      kriteriaAktif.forEach((k) => {
-        let kolom = matriks.map((m) => m[k]);
-        let max = Math.max(...kolom);
-        let min = Math.min(...kolom);
-        normalisasi.forEach((n, i) => {
-          n[k] = kriteriaTipe[k] === "Benefit" ? matriks[i][k] / max : min / matriks[i][k];
-        });
-      });
-
-      var hasilAkhir = normalisasi
-        .map((n, i) => {
-          let total = 0;
-          kriteriaAktif.forEach((k) => (total += n[k] * (kriteriaBobot[k] / 100)));
-          return { Alternatif: matriks[i].Alternatif, Total: total.toFixed(4) };
-        })
-        .sort((a, b) => b.Total - a.Total);
-    }
-
-    function tampilkan(bagian) {
-      let konten = "";
-      if (bagian === "keputusan") {
-        konten = `<h3 class="text-xl font-heading font-semibold text-accent mt-8">1. Matriks Keputusan</h3>` + buatTabel(matriks);
-      } else if (bagian === "normalisasi") {
-        konten = `<h3 class="text-xl font-heading font-semibold text-accent mt-8">2. Normalisasi Matriks</h3>` + buatTabel(normalisasi, true);
-      } else if (bagian === "hasil") {
-        konten = `<h3 class="text-xl font-heading font-semibold text-accent mt-8">3. Hasil Perangkingan</h3>` + buatTabel(hasilAkhir);
-      }
-      divHasil.innerHTML += konten;
-    }
-
-    function buatTabel(data, isDesimal = false) {
-      if (!data.length) return "";
-      let cols = Object.keys(data[0]);
-      let th = cols.map((c) => `<th class='border px-4 py-2 bg-[#CCFBF1] text-primary'>${c}</th>`).join("");
-      let rows = data
-        .map((row) => {
-          let td = cols.map((c) => `<td class='border px-4 py-2'>${isDesimal && !isNaN(row[c]) ? parseFloat(row[c]).toFixed(4) : row[c]}</td>`).join("");
-          return `<tr>${td}</tr>`;
-        })
-        .join("");
-      return `<div class='overflow-x-auto'><table class='min-w-full text-sm text-left border border-gray-300 my-4 rounded-lg shadow'><thead><tr>${th}</tr></thead><tbody class='bg-white text-gray-700'>${rows}</tbody></table></div>`;
-    }
+    // Tampilkan
+    const hasilDiv = document.getElementById("hasil");
+    hasilDiv.innerHTML = `
+      <table class="w-full text-sm text-left border border-collapse">
+        <thead class="bg-green-100 text-green-800">
+          <tr>
+            <th class="border p-2">Peringkat</th>
+            <th class="border p-2">Alternatif</th>
+            ${kriteriaList.map(k => `<th class="border p-2">Normalisasi ${k}</th>`).join("")}
+            <th class="border p-2">Skor Akhir</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${hasilAkhir.map((row, i) => `
+            <tr>
+              <td class="border p-2">${i + 1}</td>
+              <td class="border p-2">${row.nama}</td>
+              ${kriteriaList.map(k => `<td class="border p-2">${normalisasi[row.nama][k].toFixed(3)}</td>`).join("")}
+              <td class="border p-2 font-semibold">${row.skor.toFixed(4)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    `;
   </script>
 </body>
-
 </html>
